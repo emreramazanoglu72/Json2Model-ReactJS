@@ -39,13 +39,13 @@ const JavaConverter = (text, setCode, settings) => {
   if (settings.constructor == true && settings.gettersetter == true) {
     var constructorText = ``;
     var getsetText = ``;
-    constructorText = createConstructor(json, list, constructorText);
+    constructorText = createConstructor(json, list, constructorText, settings);
     getsetText += creataGetterSetter(json, list, getsetText);
     newText += constructorText;
     newText += getsetText;
   } else if (settings.constructor == true) {
     var constructorText = ``;
-    constructorText = createConstructor(json, list, constructorText);
+    constructorText = createConstructor(json, list, constructorText, settings);
     newText += constructorText;
   } else if (settings.gettersetter == true) {
     var getsetText = ``;
@@ -98,15 +98,17 @@ function creataChildObject(item, json, child = false) {
   return childText;
 }
 
-function createConstructor(json, list, newText) {
+function createConstructor(json, list, newText, settings) {
   var classText = "";
   list.map((item) => {
     var type = Types.filter((filter) => filter[typeof json[item]])[0][
       typeof json[item]
     ];
-    classText += `${type} ${item}, `;
+    classText += `${
+      type == "Object" ? `${UpperCase(item)}Child` : type
+    } ${item}, `;
   });
-  newText = `\nPublic MyModule(${classText.substr(
+  newText = `\npublic ${settings.className}(${classText.substr(
     0,
     classText.length - 2
   )}) { \n `;
