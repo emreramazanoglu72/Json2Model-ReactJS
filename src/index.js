@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+ import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-json";
+import "prismjs/themes/prism.css"; 
 ReactDOM.render(
   <React.StrictMode>
     <App />
