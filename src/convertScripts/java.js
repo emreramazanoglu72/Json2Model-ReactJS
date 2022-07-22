@@ -20,40 +20,40 @@ const JavaConverter = (text, setCode, settings) => {
     var type = Types.filter((filter) => filter[typeof json[item]])[0][
       typeof json[item]
     ];
-    if (type == "Object" && Array.isArray(json[item])) {
+    if (type ==="Object" && Array.isArray(json[item])) {
       childs.push(creataChildArray(item, json));
-    } else if (type == "Object") {
+    } else if (type ==="Object") {
       childs.push(creataChildObject(item, json));
     }
     newText += ` ${
-      item.toLowerCase() == "id" && settings.entitys == true
+      item.toLowerCase() ==="id" && settings.entitys ===true
         ? ` @Id\n @GeneratedValue\n`
-        : settings.entitys == true
+        : settings.entitys ===true
         ? `@Column(name="${item}")\n`
         : ""
     }    private ${
-      type == "Object" ? `${UpperCase(item)}Child` : type
+      type ==="Object" ? `${UpperCase(item)}Child` : type
     } ${item}; \n`;
   });
 
-  if (settings.constructor == true && settings.gettersetter == true) {
+  if (settings.constructor ===true && settings.gettersetter ===true) {
     var constructorText = ``;
     var getsetText = ``;
     constructorText = createConstructor(json, list, constructorText, settings);
     getsetText += creataGetterSetter(json, list, getsetText);
     newText += constructorText;
     newText += getsetText;
-  } else if (settings.constructor == true) {
+  } else if (settings.constructor ===true) {
     var constructorText = ``;
     constructorText = createConstructor(json, list, constructorText, settings);
     newText += constructorText;
-  } else if (settings.gettersetter == true) {
+  } else if (settings.gettersetter ===true) {
     var getsetText = ``;
     getsetText = creataGetterSetter(json, list, getsetText);
     newText += getsetText;
   }
 
-  newText += `\n \n}`;
+  newText += `}`;
 
   childs.map((item) => {
     newText += `\n \n${item}`;
@@ -70,9 +70,9 @@ function creataChildArray(item, json, child = false) {
       typeof value
     ];
     childText += `    private ${childType} ${name}; \n`;
-    if (childText == "object" && Array.isArray(value)) {
+    if (childText ==="object" && Array.isArray(value)) {
       childs.push(creataChildArray(value, json[item][0]));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(value, json[item][0]));
     }
   });
@@ -90,7 +90,7 @@ function creataChildObject(item, json, child = false) {
     childText += `    private ${childType} ${name}; \n`;
     if (Array.isArray(value)) {
       childs.push(creataChildArray(name, value[0], true));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(name, value, true));
     }
   });
@@ -105,7 +105,7 @@ function createConstructor(json, list, newText, settings) {
       typeof json[item]
     ];
     classText += `${
-      type == "Object" ? `${UpperCase(item)}Child` : type
+      type ==="Object" ? `${UpperCase(item)}Child` : type
     } ${item}, `;
   });
   newText = `\npublic ${settings.className}(${classText.substr(
@@ -128,11 +128,11 @@ function creataGetterSetter(json, list, newText) {
       typeof json[item]
     ];
     newText += `\n\npublic ${
-      type == "Object" ? `${UpperCase(item)}Child` : type
+      type ==="Object" ? `${UpperCase(item)}Child` : type
     } get${UpperCase(item)}() {
           return ${item};
       } \n \npublic void set${UpperCase(item)}(${
-      type == "Object" ? `${UpperCase(item)}Child` : type
+      type ==="Object" ? `${UpperCase(item)}Child` : type
     } ${item}) {
           this.${item} = ${item};
       } \n \n`;

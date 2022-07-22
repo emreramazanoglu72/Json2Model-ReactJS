@@ -1,14 +1,15 @@
 import { highlight, languages } from "prismjs/components/prism-core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import CSharpConverter from "../convertScripts/csharp";
 import JavaConverter from "../convertScripts/java";
+import PHPConverter from "../convertScripts/php";
 import PythonConverter from "../convertScripts/python";
 import FilterComponent from "./Filter";
 
 const Container = () => {
   const [settings, setSettings] = useState({
-    language: "Java",
+    language: "PHP",
     entitys: false,
     constructor: false,
     gettersetter: false,
@@ -51,19 +52,40 @@ const Container = () => {
       case "Python":
         PythonConverter(text, setCode, settings);
         break;
+
+      case "PHP":
+        PHPConverter(text, setCode, settings);
+        break;
+
       default:
         JavaConverter(text, setCode, settings);
         break;
     }
   };
 
-  const copyText = () => {
+  const copyText = () => {
     navigator.clipboard.writeText(code)
   }
 
+  useEffect(() => {
+    setCode("");
+  }, [settings]);
+
   return (
-    <div className="container mt-4 ">
+    <div className="container my-4 ">
       <FilterComponent settings={settings} setSettings={setSettings} />
+      <hr/>
+      <div className="text-center">
+        <button
+          onClick={() => {
+            convert();
+          }}
+          className="btn btn-dark w-100"
+        >
+          Convert
+        </button>
+      </div>
+      <hr/>
       <div className="row">
         <div className="col">
           <div className="form-group">
@@ -87,18 +109,18 @@ const Container = () => {
             <div className="form-group">
               <div className="d-flex justify-content-between">
                 <label className="mt-2">Response</label>
-                <button className="btn btn-dark mb-1" onClick={copyText}>Copy</button>
+                <button className="btn btn-dark m-1 btn-sm" onClick={copyText}>Copy</button>
               </div>
               <Editor
                 value={code}
                 highlight={(code) =>
                   highlight(
                     code,
-                    settings.language == "Java"
+                    settings.language ==="Java"
                       ? languages.java
-                      : settings.language == "Python"
-                      ? languages.python
-                      : languages.csharp
+                      : settings.language ==="Python"
+                        ? languages.python
+                        : languages.csharp
                   )
                 }
                 padding={10}
@@ -114,16 +136,7 @@ const Container = () => {
           </div>
         )}
       </div>
-      <div className="text-center">
-        <button
-          onClick={() => {
-            convert();
-          }}
-          className="btn btn-dark"
-        >
-          Convert
-        </button>
-      </div>
+      
     </div>
   );
 };

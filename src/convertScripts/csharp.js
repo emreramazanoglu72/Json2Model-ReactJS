@@ -21,9 +21,9 @@ const CSharpConverter = (text, setCode, settings) => {
     var type = Types.filter((filter) => filter[typeof json[item]])[0][
       typeof json[item]
     ];
-    if (type == "object" && Array.isArray(json[item])) {
+    if (type ==="object" && Array.isArray(json[item])) {
       childs.push(creataChildArray(item, json));
-    } else if (type == "object") {
+    } else if (type ==="object") {
       childs.push(creataChildObject(item, json));
     }
     newText += `    public ${type} ${PasscalCase(item)} { get; set; } \n`;
@@ -47,9 +47,9 @@ function creataChildArray(item, json, child = false) {
     childText += `    public ${childType}  ${PasscalCase(
       name
     )} { get; set; } \n`;
-    if (childText == "object" && Array.isArray(value)) {
+    if (childText ==="object" && Array.isArray(value)) {
       childs.push(creataChildArray(value, json[item][0]));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(value, json[item][0]));
     }
   });
@@ -69,7 +69,7 @@ function creataChildObject(item, json, child = false) {
     )} { get; set; } \n`;
     if (Array.isArray(value)) {
       childs.push(creataChildArray(name, value[0], true));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(name, value, true));
     }
   });

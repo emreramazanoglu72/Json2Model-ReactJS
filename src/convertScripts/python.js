@@ -20,10 +20,10 @@ const PythonConverter = (text, setCode, settings) => {
     var type = Types.filter((filter) => filter[typeof json[item]])[0][
       typeof json[item]
     ];
-    newText += `    ${UpperCase(item)} = ${type == "object" ? `${UpperCase(item)}Serializer()` : type}\n`;
-    if (type == "object" && Array.isArray(json[item])) {
+    newText += `    ${UpperCase(item)} = ${type ==="object" ? `${UpperCase(item)}Serializer()` : type}\n`;
+    if (type ==="object" && Array.isArray(json[item])) {
       childs.push(creataChildArray(item, json));
-    } else if (type == "object") {
+    } else if (type ==="object") {
       childs.push(creataChildObject(item, json));
     }
   });
@@ -44,9 +44,9 @@ function creataChildArray(item, json, child = false) {
       typeof value
     ];
     newText  += `    ${UpperCase(item)} = ${childType}\n`;
-    if (newText == "object" && Array.isArray(value)) {
+    if (newText ==="object" && Array.isArray(value)) {
       childs.push(creataChildArray(value, json[item][0]));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(value, json[item][0]));
     }
   });
@@ -64,7 +64,7 @@ function creataChildObject(item, json, child = false) {
     newText  += `    ${UpperCase(item)} = ${childType}\n`;
     if (Array.isArray(value)) {
       childs.push(creataChildArray(name, value[0], true));
-    } else if (childType == "object") {
+    } else if (childType ==="object") {
       childs.push(creataChildObject(name, value, true));
     }
   });

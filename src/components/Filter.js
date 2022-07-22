@@ -38,9 +38,10 @@ export default function FilterComponent({ settings, setSettings }) {
                   <option value="Java">Java</option>
                   <option value="C#">C#</option>
                   <option value="Python">Python (serializers) </option>
+                  <option value="PHP">PHP (Laravel) </option>
                 </select>
               </div>
-              {settings.language == "Java" && (
+              {settings.language ==="Java" && (
                 <div className="col form-group">
                   <label>Options</label>
                   <br />

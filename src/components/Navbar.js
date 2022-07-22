@@ -2,19 +2,13 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between">
       <a className="navbar-brand" href="#">
         JSON TO MODEL
       </a>
-      <button
-        className="navbar-toggler d-lg-none"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavId"
-        aria-controls="collapsibleNavId"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      />
+      <a className="navbar-brand text-center" href="https://emreramazanoglu.com.tr">
+        Emre Ramazanoğlu
+      </a>
     </nav>
   );
 };
