@@ -14,7 +14,7 @@ var childs = [];
 
 const CSharpConverter = (text, setCode, settings) => {
   childs = [];
-  const json = JSON.parse(text);
+  let json = JSON.parse(text);
   if(Array.isArray(json)){
     json = json[0];
   }
