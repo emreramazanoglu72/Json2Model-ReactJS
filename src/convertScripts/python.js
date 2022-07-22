@@ -13,6 +13,9 @@ var childs = [];
 const PythonConverter = (text, setCode, settings) => {
   childs = [];
   const json = JSON.parse(text);
+  if(Array.isArray(json)){
+    json = json[0];
+  }
   const list = Object.keys(json);
   var newText = `from rest_framework import serializers  \n \n`;
   newText += `class ${settings.className}Serializer(serializers.Serializer): \n`;

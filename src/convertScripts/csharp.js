@@ -15,6 +15,9 @@ var childs = [];
 const CSharpConverter = (text, setCode, settings) => {
   childs = [];
   const json = JSON.parse(text);
+  if(Array.isArray(json)){
+    json = json[0];
+  }
   const list = Object.keys(json);
   var newText = `public class ${settings.className} { \n`;
   list.map((item) => {

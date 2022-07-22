@@ -16,6 +16,9 @@ const PHPConverter = (text, setCode, settings) => {
     childs = [];
     const fillable = [];
     const json = JSON.parse(text);
+    if(Array.isArray(json)){
+        json = json[0];
+      }
     const list = Object.keys(json);
     var newText = `<?php 
 

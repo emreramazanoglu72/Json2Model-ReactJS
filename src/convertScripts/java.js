@@ -11,7 +11,10 @@ const Types = [
 var childs = [];
 const JavaConverter = (text, setCode, settings) => {
   childs = [];
-  const json = JSON.parse(text);
+  let json = JSON.parse(text);
+  if(Array.isArray(json)){
+    json = json[0];
+  }
   const list = Object.keys(json);
   var newText = settings.entitys
     ? `@Entity \n public class ${settings.className} { \n`
